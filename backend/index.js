@@ -5,19 +5,14 @@ import { JSDOM } from "jsdom";
 const app = express();
 const PORT = 3000;
 
-app.use(express.static('public'));
-
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/index.html");
-  });
-
 app.get("/api/scrape", async (req, res) => {
     const keyword = req.query.keyword;
     if (!keyword) {
         return res.status(400).json({ error: "Keyword is required" });
     }
     console.log(`Scraping for keyword: ${keyword}`);
-    fetchAmazonResults(keyword);
+    const laptops = fetchAmazonResults(keyword);
+    res.json(laptops);
 });
 
 async function fetchAmazonResults(keyword) {
@@ -33,6 +28,8 @@ async function fetchAmazonResults(keyword) {
 
          const results = parseAmazonResults(response.data);
         console.log(results);
+        return results;
+        
     } catch (error) {
         console.error("Error fetching Amazon results:", error.message);
     }
@@ -60,7 +57,7 @@ function parseAmazonResults(html) {
         results.push({ title, price, rating, image });
     });
 
-    return results;
+    return results.filter(item => item.title.includes("Laptop")); // avoid unrelated items
 }
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
