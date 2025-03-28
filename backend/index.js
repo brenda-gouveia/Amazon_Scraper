@@ -11,7 +11,8 @@ app.get("/api/scrape", async (req, res) => {
         return res.status(400).json({ error: "Keyword is required" });
     }
     console.log(`Scraping for keyword: ${keyword}`);
-    const laptops = fetchAmazonResults(keyword);
+    const laptops = await fetchAmazonResults(keyword);
+    console.log(laptops);
     res.json(laptops);
 });
 
@@ -27,7 +28,7 @@ async function fetchAmazonResults(keyword) {
         });
 
          const results = parseAmazonResults(response.data);
-        console.log(results);
+        //console.log(results);
         return results;
         
     } catch (error) {
