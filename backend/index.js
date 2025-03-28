@@ -1,9 +1,12 @@
 import express from "express";
 import axios from "axios";
 import { JSDOM } from "jsdom";
+import cors from "cors";
 
 const app = express();
 const PORT = 3000;
+
+app.use(cors({ origin: "http://localhost:5173" }));
 
 app.get("/api/scrape", async (req, res) => {
     const keyword = req.query.keyword;
@@ -12,7 +15,7 @@ app.get("/api/scrape", async (req, res) => {
     }
     console.log(`Scraping for keyword: ${keyword}`);
     const laptops = await fetchAmazonResults(keyword);
-    console.log(laptops);
+    console.log('Laptop');
     res.json(laptops);
 });
 
