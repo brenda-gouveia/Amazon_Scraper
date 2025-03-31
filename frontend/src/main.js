@@ -50,7 +50,7 @@ import './style.css'
               <img src="${product.image}" alt="${product.title}">
               <h2>${product.title}</h2>
               <h3>${product.price}</h3>
-              <h4>⭐ ${product.rating} avaliations<h4>
+              <h4>⭐ ${product.rating} avaliations - ${product.reviewsCount} reviews<h4>
             </div>
           </div>
       `;

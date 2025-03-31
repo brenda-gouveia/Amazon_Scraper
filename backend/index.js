@@ -70,10 +70,14 @@ function parseAmazonResults(html) {
         const ratingElement = item.querySelector(".a-icon-star-small");
         const rating = ratingElement ? ratingElement.textContent : "";
 
+        const reviewsElement = item.querySelector(".a-size-base");
+        const reviewsCount = reviewsElement && !isNaN(reviewsElement.textContent.trim()) ? reviewsElement.textContent.trim() : "";
+
+
         const imageElement = item.querySelector("img");
         const image = imageElement ? imageElement.src : "";
 
-        results.push({ title, price, rating, image });
+        results.push({ title, price, rating, reviewsCount, image });
     });
 
     let word = capitalizeFirstLetter(keyword);
