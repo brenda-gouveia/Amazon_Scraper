@@ -10,13 +10,21 @@ let keyword = '';
 app.use(cors({ origin: "http://localhost:5173" }));
 
 app.get("/api/scrape", async (req, res) => {
-    keyword = req.query.keyword;
-    if (!keyword) {
-        return res.status(400).json({ error: "Keyword is required" });
+    try {
+        keyword = req.query.keyword;
+        if (!keyword) {
+            return res.status(400).json({ error: "Keyword is required" });
+        }
+        console.log(`Scraping for keyword: ${keyword}`);
+        const laptops = await fetchAmazonResults(keyword);
+        if (!laptops.length) {
+            return res.status(404).json({ error: "No products found" });
+        }
+        res.json(laptops);
+    } catch (error) {
+        console.error("Error during scraping:", error.message);
+        res.status(500).json({ error: "Internal server error" });
     }
-    console.log(`Scraping for keyword: ${keyword}`);
-    const laptops = await fetchAmazonResults(keyword);
-    res.json(laptops);
 });
 
 function delay(ms) {
