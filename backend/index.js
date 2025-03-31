@@ -19,15 +19,26 @@ app.get("/api/scrape", async (req, res) => {
     res.json(laptops);
 });
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function fetchAmazonResults(keyword) {
     try {
+        await delay(5000); // Delay to avoid being blocked by Amazon
         const url = `https://www.amazon.com/s?k=${encodeURIComponent(keyword)}`;
         
         const response = await axios.get(url, {
             headers: {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-                "Accept-Language": "en-US,en;q=0.9",
-            },
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+            "Connection": "keep-alive",
+            "Referer": "https://www.google.com/",
+            "DNT": "1", // Do Not Track
+            "Upgrade-Insecure-Requests": "1"
+                
+            }
         });
 
          const results = parseAmazonResults(response.data);
