@@ -1,51 +1,117 @@
+/* Styling for the body of the page */
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-image: url('../public/cover.jpg');
-  background-repeat: no-repeat; 
-  background-size: cover;
-  background-position: center;
-  width: 100vw; 
-  height: 100vh; 
-  margin: 0;
-  padding: 0; 
-  display: flex;
-  flex-direction: column;
+  font-family: Arial, sans-serif; /* Sets the font family */
+  text-align: center; /* Centers text alignment */
+  background-image: url('../cover.jpg'); /* Sets a background image */
+  background-repeat: no-repeat; /* Prevents the background from repeating */
+  background-size: cover; /* Ensures the background image covers the entire area */
+  background-position: center; /* Centers the background image */
+  width: 100vw; /* Sets the width to 100% of the viewport */
+  height: 100vh; /* Sets the height to 100% of the viewport */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  display: flex; /* Enables flexbox layout */
+  flex-direction: column; /* Stacks child elements vertically */
 }
+
+/* Styling for a container element */
 .container {
-  margin-bottom: 30vh;
-  width: 400px;
+  margin-bottom: 30vh; /* Adds space below the container */
+  width: 400px; /* Sets a fixed width */
 }
+
+/* Styling for input fields */
 input {
-  width: 80%;
-  padding: 10px;
-  border-radius: 10px;
+  width: 80%; /* Sets the width to 80% of the parent */
+  padding: 10px; /* Adds padding inside the input */
+  border-radius: 10px; /* Rounds the corners */
 }
+
+/* Styling for buttons */
 button {
-  margin-top: 8px;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  width: 80px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.1s;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  margin-top: 8px; /* Adds space above the button */
+  padding: 10px; /* Adds padding inside the button */
+  background-color: black; /* Sets the background color */
+  color: white; /* Sets the text color */
+  width: 80px; /* Sets a fixed width */
+  border-radius: 5px; /* Rounds the corners */
+  border: none; /* Removes the border */
+  cursor: pointer; /* Changes the cursor to a pointer on hover */
+  transition: background-color 0.3s, transform 0.1s; /* Adds smooth transitions */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Adds a shadow effect */
 }
+
+/* Styling for button hover state */
 .btn:hover {
-  background-color: #333; /* Cinza escuro ao passar o mouse */
+  background-color: #333; /* Changes background color on hover */
 }
+
+/* Styling for button active (clicked) state */
 .btn:active {
-  background-color: #555; /* Cinza mais claro ao clicar */
-  transform: scale(0.95); /* Pequeno efeito de clique */
+  background-color: #555; /* Changes background color when clicked */
+  transform: scale(0.95); /* Slightly shrinks the button */
 }
+
+/* Wrapper for centering content */
 .wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: 1; /* Fills available space */
+  display: flex; /* Enables flexbox layout */
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
 }
-#results img {
-  width: 100px;
+
+/* Styling for modal (popup) */
+.modal {
+  display: none; /* Hides the modal by default */
+  position: fixed; /* Fixes the modal in place */
+  z-index: 1; /* Ensures the modal appears above other elements */
+  left: 0; /* Aligns to the left edge */
+  top: 0; /* Aligns to the top edge */
+  width: 100%; /* Covers the full width of the viewport */
+  height: 100%; /* Covers the full height of the viewport */
+  background-color: rgba(0,0,0,0.5); /* Adds a semi-transparent dark background */
+}
+
+/* Styling for modal content */
+.modal-content {
+  background-color: white; /* Sets the background color */
+  margin: 4% auto; /* Centers the modal content */
+  padding: 20px; /* Adds padding inside the modal */
+  width: 50%; /* Sets the width to 50% of the viewport */
+  border-radius: 10px; /* Rounds the corners */
+  text-align: center; /* Centers the text */
+}
+
+/* Styling for the close button inside the modal */
+.close {
+  color: black; /* Sets the text color */
+  font-size: 24px; /* Increases the font size */
+  float: right; /* Aligns the button to the right */
+  cursor: pointer; /* Changes the cursor to a pointer */
+}
+
+/* Styling for unordered lists */
+ul {
+  list-style-type: none; /* Removes default bullet points */
+  max-height: 450px; /* Limits the height of the list */
+  overflow-y: auto; /* Adds vertical scrolling if content overflows */
+  padding: 10px; /* Adds padding inside the list */
+}
+
+/* Styling for product cards */
+.product-card {
+  border-radius: 10px; /* Rounds the corners */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow effect */
+  background-color: white; /* Sets the background color */
+  margin: 10px; /* Adds space around the card */
+}
+
+/* Styling for product cards on hover */
+.product-card:hover {
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Increases shadow intensity */
+}
+
+/* Styling for image container inside product cards */
+.img-container {
+  padding: 10px; /* Adds padding around the image */
 }

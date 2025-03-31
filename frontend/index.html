@@ -4,22 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amazon Scraper</title>
+    <!-- Link to the external CSS file for styling -->
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
     <div class="wrapper">
         <div class="container">
-            <img src="public/logo_t6.png" alt="Logo" class="logo">
+            <!-- Logo image -->
+            <img src="./logo_t6.png" alt="Logo" class="logo">
+            <!-- Input field for entering a keyword -->
             <input type="text" id="keyword" placeholder="Enter a keyword">
+            <!-- Button to trigger the search functionality -->
             <button class="btn" id="search">Search</button>
-            <div id="results"></div>
         </div>
-        <!-- <footer>
-            <p>&copy; 2025 Amazon Scraper. All rights reserved.</p>
-        </footer> -->
-        
+    </div> 
+    <!-- Modal for displaying the product list -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <!-- Close button for the modal -->
+            <span class="close">&times;</span>
+            <!-- Modal title -->
+            <h2>Product List</h2>
+            <!-- Unordered list to display the products -->
+            <ul class="modal-ul">
+            </ul>
+        </div>
     </div>
 
-  <script type="module" src="src/main.js"></script>
+    <!-- Link to the main JavaScript file (using ES module syntax) -->
+    <script type="module" src="src/main.js"></script>
 </body>
 </html>

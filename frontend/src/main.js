@@ -1,37 +1,64 @@
-  // Validate the keyword input
-  // If the input is empty, show an alert
-  // If the input is not empty, proceed with the fetch request
-  // Fetch the products from the server
-  // Update the UI with the fetched products
-  // Clear previous results
-document.getElementById("search").addEventListener("click", async () => {
-  const keyword = document.getElementById("keyword").value.trim();
-  
+import './style.css'
 
-  if (!keyword) return alert("Enter a keyword!");
+  // Get the modal element
+  let modal = document.getElementById("myModal"); 
 
-  const response = await fetch(`http://localhost:3000/api/scrape?keyword=${encodeURIComponent(keyword)}`);
-  const products = await response.json();
+  // Get the <span> element that closes the modal
+  let span = document.getElementsByClassName("close")[0]; 
 
-  // Selecionar o container e remover todo o conteúdo
-  const container = document.querySelector(".container");
-  container.innerHTML = ""; // Remove tudo da tela
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
 
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
 
-  const resultsContainer = document.getElementById("results");
-  resultsContainer.innerHTML = "";
+  // Add an event listener to the search button
+  document.getElementById("search").addEventListener("click", async () => {
+    // Get the keyword input value and trim any whitespace
+    const keyword = document.getElementById("keyword").value.trim();
+    
+    // If the keyword is empty, show an alert and stop execution
+    if (!keyword) return alert("Enter a keyword!");
 
-  products.forEach(product => {
-      const productCard = document.createElement("div");
-      productCard.className = "product-card";
+    // Make a fetch request to the server with the keyword as a query parameter
+    const response = await fetch(`http://localhost:3000/api/scrape?keyword=${encodeURIComponent(keyword)}`);
+    
+    // Parse the JSON response to get the list of products
+    const products = await response.json();
 
-      productCard.innerHTML = `
-          <img src="${product.image}" alt="${product.title}">
-          <h2>${product.title}</h2>
-          <h3>${product.price}</h3>
-          <p>⭐ ${product.rating} avaliações</p>
+    // Get the unordered list element inside the modal
+    const productList = document.querySelector(".modal-ul");
+
+    // Clear any previous results in the list
+    productList.innerHTML = "";
+
+    // Iterate over the fetched products and create list items for each product
+    products.forEach(product => {
+      // Create a new <li> element
+      const li = document.createElement("li");
+      
+      // Set the inner HTML of the <li> with product details
+      li.innerHTML = `
+          <div class="product-card">
+            <div class="img-container">
+              <img src="${product.image}" alt="${product.title}">
+              <h2>${product.title}</h2>
+              <h3>${product.price}</h3>
+              <h4>⭐ ${product.rating} avaliations<h4>
+            </div>
+          </div>
       `;
 
-      resultsContainer.appendChild(productCard);
+      // Append the <li> to the unordered list
+      productList.appendChild(li);
+
+      // Display the modal with the product list
+      modal.style.display = "block";
+    });
   });
-});

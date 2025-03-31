@@ -5,17 +5,17 @@ import cors from "cors";
 
 const app = express();
 const PORT = 3000;
+let keyword = '';
 
 app.use(cors({ origin: "http://localhost:5173" }));
 
 app.get("/api/scrape", async (req, res) => {
-    const keyword = req.query.keyword;
+    keyword = req.query.keyword;
     if (!keyword) {
         return res.status(400).json({ error: "Keyword is required" });
     }
     console.log(`Scraping for keyword: ${keyword}`);
     const laptops = await fetchAmazonResults(keyword);
-    console.log('Laptop');
     res.json(laptops);
 });
 
@@ -50,6 +50,10 @@ async function fetchAmazonResults(keyword) {
     }
 }
 
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function parseAmazonResults(html) {
     const dom = new JSDOM(html);
     const document = dom.window.document;
@@ -72,7 +76,13 @@ function parseAmazonResults(html) {
         results.push({ title, price, rating, image });
     });
 
-    return results.filter(item => item.title.includes("Laptop")); // avoid unrelated items
+    let word = capitalizeFirstLetter(keyword);
+
+    console.log(`Keyword: ${word} Funcionou`);
+
+
+
+    return results.filter(item => item.title.includes(word)); // avoid unrelated items
 }
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
