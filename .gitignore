@@ -1,4 +1,5 @@
 # dependencies (bun install)
+backend/bun.lock
 node_modules
 bun.lock
 # output
